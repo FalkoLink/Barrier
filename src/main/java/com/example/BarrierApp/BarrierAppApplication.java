@@ -8,6 +8,7 @@ public class BarrierAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BarrierAppApplication.class, args);
+		System.out.println("I wanna dit my first commit");
 	}
 
 }
