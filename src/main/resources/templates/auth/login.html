@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Login page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link th:href="@{/css/style.css}" rel="stylesheet" >
 </head>
-<body>
+<body class="auth-page">
+  <div class="card">
+    <img th:src="@{/images/logo.png}" alt="ZXС Barrier Logo" />
 
-<form name="f" method="post" action="/process_login">
-  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <form method="post" action="/process_login">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-  <label for="username">Введите имя пользователя: </label>
-  <input type="text" name="username" id="username"/>
-  <br/>
-  <label for="password">Введите пароль: </label>
-  <input type="password" name="password" id="password"/>
-  <br/>
-  <input type="submit" value="Login"/>
+      <div class="form-group">
+        <input type="text" id="username" name="username" required placeholder = "Введите имя пользователя" />
+      </div>
 
-  <div th:if="${param.error}" style="color: red">
-    Неправильные имя или пароль
+      <div class="form-group">
+        <input type="password" id="password" name="password" required placeholder = "Введите пароль" />
+      </div>
+      <div th:if="${param.error}" style="color: red">
+        Неправильные имя или пароль
+      </div>
+      <button type="submit" class="btn btn-login">Login</button>
+    </form>
   </div>
-</form>
-
 </body>
 </html>

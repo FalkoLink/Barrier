@@ -21,9 +21,9 @@ public class HelloController {
         this.adminService = adminService;
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/main")
     public String sayHello() {
-        return "hello";
+        return "main";
     }
 
     @GetMapping("/showUserInfo")
@@ -32,7 +32,7 @@ public class HelloController {
         UserDetailsImpl personDetails = (UserDetailsImpl) authentication.getPrincipal();
         System.out.println(personDetails.getUser());
 
-        return "hello";
+        return "main";
     }
 
     @GetMapping("/admin")

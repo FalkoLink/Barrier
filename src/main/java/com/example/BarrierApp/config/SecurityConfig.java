@@ -27,21 +27,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin").hasRole("ADMIN")
-                        .requestMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                        .anyRequest().hasAnyRole("USER", "ADMIN")
-                )
-                .formLogin(form -> form
-                        .loginPage("/auth/login")
-                        .loginProcessingUrl("/process_login")
-                        .defaultSuccessUrl("/hello", true)
-                        .failureUrl("/auth/login?error")
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/auth/login")
-                );
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/admin").hasRole("ADMIN")
+                .requestMatchers("/auth/login", "/auth/registration", "/error").permitAll()
+                .anyRequest().hasAnyRole("USER", "ADMIN")
+            )
+            .formLogin(form -> form
+                .loginPage("/auth/login")
+                .loginProcessingUrl("/process_login")
+                .defaultSuccessUrl("/main", true)
+                .failureUrl("/auth/login?error")
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/auth/login")
+            );
 
         return http.build();
     }

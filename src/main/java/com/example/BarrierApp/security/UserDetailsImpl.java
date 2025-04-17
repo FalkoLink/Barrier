@@ -1,9 +1,9 @@
 package com.example.BarrierApp.security;
 
+import com.example.BarrierApp.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.example.BarrierApp.models.User;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +19,7 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // SHOW_ACCOUNT, WITHDRAW_MONEY, SEND_MONEY
         // ROLE_ADMIN, ROLE_USER - это роли
-        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName()));
+        return Collections.singletonList(new SimpleGrantedAuthority(this.user.getRole().getName()));
     }
 
     @Override

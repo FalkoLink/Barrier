@@ -1,6 +1,5 @@
 package com.example.BarrierApp.controllers;
 
-import com.example.BarrierApp.models.User;
 import com.example.BarrierApp.services.RegistrationService;
 import com.example.BarrierApp.util.UserValidator;
 import jakarta.validation.Valid;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.BarrierApp.models.User;
 
 @Controller
 @RequestMapping("/auth")
@@ -40,10 +40,13 @@ public class AuthController {
                                       BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
-        if (bindingResult.hasErrors())
-            return "/auth/registration";
+        if (!bindingResult.hasErrors()) {
+            registrationService.register(user, bindingResult);
+        }
 
-        registrationService.register(user);
+        if (bindingResult.hasErrors()) {
+            return "auth/registration";
+        }
 
         return "redirect:/auth/login";
     }
