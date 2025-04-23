@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ Панель</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body class="admin-page">
+<div class="navbar">
+  <a href="#users" onclick="showSection('users')">
+    <img th:src="@{/images/logo.png}" alt="Logo">
+  </a>
+</div>
+<div style="display: flex; flex: 1; width: 100%;">
+  <div class="sidebar">
+    <div class="sidebar-title"><h1>Admin Panel</h1></div>
+    <a href="#users" class="nav-link active" onclick="showSection('users')"><i class="fa-solid fa-user" style="margin-right: 8px;"></i>Пользователи</a>
+    <a href="#barriers" class="nav-link" onclick="showSection('barriers')"><i class="fa-solid fa-hand" style="margin-right: 8px;"></i>Управление шлагбаумами</a>
+    <a href="#tariffs" class="nav-link" onclick="showSection('tariffs')"><i class="fa-solid fa-file" style="margin-right: 8px;"></i>Тарифы</a>
+    <a href="#logs" class="nav-link" onclick="showSection('logs')"><i class="fa-solid fa-list" style="margin-right: 8px;"></i>Логи</a>
+  </div>
+
+  <div class="main">
+    <section id="users" class="active">
+      <h1>Пользователи</h1>
+      <button class="add-button">Добавить пользователя</button>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Роль</th>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Телефон</th>
+          <th>Email</th>
+          <th>Пароль</th>
+          <th>Подписка</th>
+          <th>Активен</th>
+          <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Admin</td>
+          <td>Иван</td>
+          <td>Иванов</td>
+          <td>+7 771 123 45 67</td>
+          <td>ivan1@example.com</td>
+          <td>vnewiv33fe</td>
+          <td>Базовый</td>
+          <td>Да</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Admin</td>
+          <td>Ivan</td>
+          <td>Иванов</td>
+          <td>+7 773 123 45 67</td>
+          <td>ivan2@example.com</td>
+          <td>••••••••</td>
+          <td>Базовый</td>
+          <td>Да</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Admin</td>
+          <td>Иван</td>
+          <td>Ivanov</td>
+          <td>+7 700 123 45 67</td>
+          <td>ivan3@example.com</td>
+          <td>••••••••</td>
+          <td>Базовый</td>
+          <td>Да</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="barriers">
+      <h1>Шлагбаумы</h1>
+      <button class="add-button">Добавить шлагбаум</button>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Адресс</th>
+          <th>Шлагбаум_ID</th>
+          <th>Количество соединений</th>
+          <th>Модель</th>
+          <th>Статус</th>
+          <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>ул. Ушкемпирова, 42</td>
+          <td>1</td>
+          <td>50</td>
+          <td>Gard 6000</td>
+          <td>Активен</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+          <td>2</td>
+          <td>ул. Халиуллина, 196/17</td>
+          <td>2</td>
+          <td>38</td>
+          <td>DZ 601</td>
+          <td>Активен</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+          <td>3</td>
+          <td>ул. Жамбыла, 118</td>
+          <td>3</td>
+          <td>99</td>
+          <td>B680H</td>
+          <td>Активен</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="tariffs">
+      <h1>Тарифы</h1>
+      <button class="add-button">Добавить тариф</button>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Название</th>
+          <th>Длительность (дней)</th>
+          <th>Цена</th>
+          <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>Базовый</td>
+          <td>365</td>
+          <td>10000 KZT</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="logs">
+      <h1>Логи</h1>
+
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>User_ID</th>
+          <th>Шлагбаум_ID</th>
+          <th>Взаимдействия</th>
+          <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>2025-04-16 16:47</td>
+          <td class="action-icons">
+            <i class="fa-solid fa-pen"></i>
+            <i class="fa-solid fa-trash"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</div>
+
+
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(section => {
+      section.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    document.querySelector(`.nav-link[href="#${id}"]`).classList.add('active');
+  }
+</script>
+</body>
+</html>

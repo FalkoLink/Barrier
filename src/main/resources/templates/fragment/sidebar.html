@@ -1,0 +1,7 @@
+<div class="sidebar" th:fragment="sidebar">
+  <div class="sidebar-title"><h1>Admin Panel</h1></div>
+  <a href="/admin/users" class="nav-link" th:classappend="${currentPage == 'users'} ? ' active'"><i class="fa-solid fa-user" style="margin-right: 8px;"></i>Пользователи</a>
+  <a href="/admin/addresses" class="nav-link" th:classappend="${currentPage == 'address'} ? ' active'"><i class="fa-solid fa-hand" style="margin-right: 8px;"></i>Управление шлагбаумами</a>
+  <a href="/admin/tariffs" class="nav-link" th:classappend="${currentPage == 'tariffs'} ? ' active'"><i class="fa-solid fa-file" style="margin-right: 8px;"></i>Тарифы</a>
+  <a href="/admin/logs" class="nav-link" th:classappend="${currentPage == 'logs'} ? ' active'"><i class="fa-solid fa-list" style="margin-right: 8px;"></i>Логи</a>
+</div>

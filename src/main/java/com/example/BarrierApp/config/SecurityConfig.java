@@ -1,6 +1,6 @@
 package com.example.BarrierApp.config;
 
-import com.example.BarrierApp.services.UserDetailsServiceImpl;
+import com.example.BarrierApp.services.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

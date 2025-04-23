@@ -1,4 +1,4 @@
-package com.example.BarrierApp.services;
+package com.example.BarrierApp.services.impl;
 
 import com.example.BarrierApp.models.User;
 import com.example.BarrierApp.repositories.UserRepository;
@@ -30,4 +30,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new UserDetailsImpl(user.get());
     }
+
+    public Boolean existsByPhoneNumber(String phoneNumber) {
+        return userRepository.existsByPhone(phoneNumber);
+    }
+
 }

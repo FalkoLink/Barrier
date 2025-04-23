@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="fragment/head::head(pageTitle='Пользователи')">
+
+<body class="admin-page">
+
+<div th:replace="fragment/navbar::navbar"></div>
+<div style="display: flex; flex: 1; width: 100%;">
+  <div th:replace="fragment/sidebar::sidebar(currentPage='users')"></div>
+
+  <div class="main">
+    <section id="users" class="active">
+      <h1>Пользователи</h1>
+      <button class="add-button">Добавить пользователя</button>
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Роль</th>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Телефон</th>
+          <th>Email</th>
+          <th>Активен</th>
+          <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.role.name == 'ROLE_ADMIN' ? 'Admin' : 'User'}"></td>
+          <td th:text="${user.firstName}"></td>
+          <td th:text="${user.lastName}"></td>
+          <td th:text="${user.phone}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.expired ? 'Нет' : 'Да'}"></td>
+          <td class="action-icons">
+            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}"><i class="fa-solid fa-pen"></i></a>
+            <a th:href="@{/admin/users/delete/{id}(id=${user.id})}"><i class="fa-solid fa-trash"></i></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
+
+</body>
+</html>

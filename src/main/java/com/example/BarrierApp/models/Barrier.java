@@ -1,12 +1,16 @@
 package com.example.BarrierApp.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
@@ -30,11 +34,15 @@ public class Barrier {
 
     @ManyToOne
     @JoinColumn(name = "connection_id")
-    private Address connection;
+    private Connection connection;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime timestamp = LocalDateTime.now();
+    @Builder.Default
+    private boolean status = false;
 
-    @ManyToMany(mappedBy = "barriers")
-    private Set<User> users = new HashSet<>();
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }

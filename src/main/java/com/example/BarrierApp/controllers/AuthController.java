@@ -40,13 +40,11 @@ public class AuthController {
                                       BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
 
-        if (!bindingResult.hasErrors()) {
-            registrationService.register(user, bindingResult);
-        }
-
         if (bindingResult.hasErrors()) {
             return "auth/registration";
         }
+
+        registrationService.register(user);
 
         return "redirect:/auth/login";
     }

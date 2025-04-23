@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="fragment/head::head(pageTitle='Профиль')">
+<body>
+  <div th:replace="fragment/navbar::navbar"></div>
+  <div style="display: flex; flex: 1; width: 100%;">
+    <div th:replace="fragment/profileSidebar::profileSidebar"></div>
+
+    <div class="main">
+      <div class="section">
+        <h1>Данные пользователя</h1>
+        <div class="user-info">
+          <div>
+            <strong>ФИО:</strong>
+            <span th:text="${user.lastName}+' '+${user.firstName}"></span>
+          </div>
+          <div>
+            <strong>Телефон:</strong>
+            <span th:text="${user.phone}"></span>
+          </div>
+          <div>
+            <strong>Email:</strong>
+            <span th:text="${user.email}"></span>
+          </div>
+          <div>
+            <strong>Подписка:</strong>
+            <span>Базовый</span>
+          </div>
+          <div>
+            <strong>Адрес:</strong>
+            <span>ЖК Ушкемпирова, 42</span>
+          </div>
+          <div>
+            <strong>Шлагбаум:</strong>
+            <div style="display: block">
+              <p>Шлагбаум 2</p>
+              <p>Шлагбаум 2</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h1>История действий</h1>
+        <div class="user-info">
+          <div>
+            <strong>15.04.2025, 08:42</strong>
+            <span>Открыт шлагбаум 2</span>
+          </div>
+          <div>
+            <strong>14.04.2025, 18:15</strong>
+            <span>Открыт шлагбаум 2</span>
+          </div>
+          <div>
+            <strong>13.04.2025, 07:22</strong>
+            <span>Открыт шлагбаум 2</span>
+          </div>
+          <div>
+            <strong>12.04.2025, 12:05</strong>
+            <span>Открыт шлагбаум 2</span>
+          </div>
+          <div>
+            <strong>10.04.2025, 19:43</strong>
+            <span>Открыт шлагбаум 2</span>
+          </div>
+        </div>
+      </div>
+<!--      <div class="section">-->
+<!--        <h1>Присоединить к адресу</h1>-->
+<!--        <div class="input-group">-->
+<!--          <label for="address">Выберите ЖК</label>-->
+<!--          <select id="address" class="select">-->
+<!--            <option value="zhk1">ЖК Ушкемпирова, 42</option>-->
+<!--            <option value="zhk2">ЖК Халиуллина, 196/17</option>-->
+<!--            <option value="zhk3">ЖК Жамбыла, 118</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <div class="input-group">-->
+<!--          <label for="barrier">Выберите шлагбаум</label>-->
+<!--          <select id="barrier" class="select">-->
+<!--            <option value="barrier1">Шлагбаум 1</option>-->
+<!--            <option value="barrier2">Шлагбаум 2</option>-->
+<!--            <option value="barrier3">Шлагбаум 3</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--        <button class="button">Присоединить</button>-->
+<!--      </div>-->
+    </div>
+  </div>
+</body>
+</html>

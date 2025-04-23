@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="fragment/head::head(pageTitle='Адрес')">
+<body>
+
+<div th:replace="fragment/navbar::navbar"></div>
+<div style="display: flex; flex: 1; width: 100%;">
+    <div th:replace="fragment/sidebar::sidebar(currentPage='address')"></div>
+
+    <div class="main">
+        <div class="section">
+            <h1>Данные по Адресу</h1>
+            <div class="user-info">
+                <div>
+                    <strong>Адрес:</strong>
+                    <span th:text="${address.address}"></span>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Шлагбаум</th>
+                            <th>Тип связи</th>
+                            <th>Статус</th>
+                            <th>Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="barrier : ${barriers}">
+                            <td th:text="${barrier.id}"></td>
+                            <td th:text="${barrier.name}"></td>
+                            <td th:text="${barrier.connection.name}"></td>
+                            <td th:text="${barrier.status? 'Открыт' : 'Закрыт'}"></td>
+                            <td class="action-icons">
+                                <a th:href="@{/admin/barriers/edit/{id}(id=${barrier.id})}"><i class="fa-solid fa-pen"></i></a>
+                                <a th:href="@{/admin/barriers/delete/{id}(id=${barrier.id})}"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h1>Пользователи</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Роль</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Телефон</th>
+                    <th>Email</th>
+                    <th>Активен</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+<!--                <p th:text="${users}"></p>-->
+<!--                    <tr th:each="user : ${users}">-->
+<!--                        <td th:text="${user.id}"></td>-->
+<!--                        <td th:text="${user.role.name == 'ROLE_ADMIN' ? 'Admin' : 'User'}"></td>-->
+<!--                        <td th:text="${user.firstName}"></td>-->
+<!--                        <td th:text="${user.lastName}"></td>-->
+<!--                        <td th:text="${user.phone}"></td>-->
+<!--                        <td th:text="${user.email}"></td>-->
+<!--                        <td th:text="${user.expired ? 'Нет' : 'Да'}"></td>-->
+<!--                        <td class="action-icons">-->
+<!--                            <a th:href="@{/admin/users/edit/{id}(id=${user.id})}"><i class="fa-solid fa-pen"></i></a>-->
+<!--                            <a th:href="@{/admin/users/delete/{id}(id=${user.id})}"><i class="fa-solid fa-trash"></i></a>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+        <!--      <div class="section">-->
+        <!--        <h1>Присоединить к адресу</h1>-->
+        <!--        <div class="input-group">-->
+        <!--          <label for="address">Выберите ЖК</label>-->
+        <!--          <select id="address" class="select">-->
+        <!--            <option value="zhk1">ЖК Ушкемпирова, 42</option>-->
+        <!--            <option value="zhk2">ЖК Халиуллина, 196/17</option>-->
+        <!--            <option value="zhk3">ЖК Жамбыла, 118</option>-->
+        <!--          </select>-->
+        <!--        </div>-->
+        <!--        <div class="input-group">-->
+        <!--          <label for="barrier">Выберите шлагбаум</label>-->
+        <!--          <select id="barrier" class="select">-->
+        <!--            <option value="barrier1">Шлагбаум 1</option>-->
+        <!--            <option value="barrier2">Шлагбаум 2</option>-->
+        <!--            <option value="barrier3">Шлагбаум 3</option>-->
+        <!--          </select>-->
+        <!--        </div>-->
+        <!--        <button class="button">Присоединить</button>-->
+        <!--      </div>-->
+    </div>
+</div>
+</body>
+</html>

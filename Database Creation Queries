@@ -19,8 +19,6 @@ CREATE TABLE users (
 
 CREATE TABLE addresses (
     id SERIAL PRIMARY KEY,
-	region VARCHAR(50),
-    city VARCHAR(50),
     address VARCHAR(100),
 	timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -57,11 +55,11 @@ CREATE TABLE payments (
 	timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE users_barriers (
+CREATE TABLE users_addresses (
     user_id INTEGER REFERENCES users(id),
-    barrier_id INTEGER REFERENCES barriers(id),
-    PRIMARY KEY (user_id, barrier_id),
-	timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    address_id INTEGER REFERENCES addresses(id),
+    PRIMARY KEY (user_id, address_id),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE logs (

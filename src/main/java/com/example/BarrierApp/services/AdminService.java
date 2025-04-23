@@ -1,12 +1,15 @@
 package com.example.BarrierApp.services;
 
-import org.springframework.stereotype.Service;
+import com.example.BarrierApp.models.User;
 
-@Service
-public class AdminService {
+import java.util.List;
+import java.util.Optional;
 
-    public void doAdminStuff() {
-        System.out.println("Only admin here");
-    }
+public interface AdminService {
+    List<User> findAll();
+    Optional<User> findById(Long id);
+    void save(User user);
+    void update(Long id, User updatedUser);
+    void delete(Long id);
 }
 
