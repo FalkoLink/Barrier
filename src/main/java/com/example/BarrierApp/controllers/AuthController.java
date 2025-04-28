@@ -3,7 +3,7 @@ package com.example.BarrierApp.controllers;
 import com.example.BarrierApp.services.RegistrationService;
 import com.example.BarrierApp.util.UserValidator;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +14,11 @@ import com.example.BarrierApp.models.User;
 
 @Controller
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final RegistrationService registrationService;
     private final UserValidator userValidator;
-
-    @Autowired
-    public AuthController(RegistrationService registrationService, UserValidator userValidator) {
-        this.registrationService = registrationService;
-        this.userValidator = userValidator;
-    }
 
     @GetMapping("/login")
     public String loginPage() {

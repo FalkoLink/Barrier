@@ -3,21 +3,17 @@ package com.example.BarrierApp.services.impl;
 import com.example.BarrierApp.models.Role;
 import com.example.BarrierApp.repositories.RoleRepository;
 import com.example.BarrierApp.services.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
-
-    @Autowired
-    public RoleServiceImpl(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
 
     @Override
     public Optional<Role> findByName(String name) {

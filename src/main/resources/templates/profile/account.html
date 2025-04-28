@@ -26,15 +26,16 @@
             <strong>Подписка:</strong>
             <span>Базовый</span>
           </div>
-          <div>
-            <strong>Адрес:</strong>
-            <span>ЖК Ушкемпирова, 42</span>
-          </div>
-          <div>
-            <strong>Шлагбаум:</strong>
-            <div style="display: block">
-              <p>Шлагбаум 2</p>
-              <p>Шлагбаум 2</p>
+          <div style="display: block" th:if="${addresses != null and !addresses.isEmpty()}" th:each="address : ${addresses}">
+            <div>
+              <strong>Адрес:</strong>
+              <span th:text="${address.addressName}"></span>
+            </div>
+            <div>
+              <strong>Шлагбаум:</strong>
+              <div style="display: block">
+                <p th:each="barrier : ${address.barriers}" th:text="${barrier.name}"></p>
+              </div>
             </div>
           </div>
         </div>
@@ -65,26 +66,6 @@
           </div>
         </div>
       </div>
-<!--      <div class="section">-->
-<!--        <h1>Присоединить к адресу</h1>-->
-<!--        <div class="input-group">-->
-<!--          <label for="address">Выберите ЖК</label>-->
-<!--          <select id="address" class="select">-->
-<!--            <option value="zhk1">ЖК Ушкемпирова, 42</option>-->
-<!--            <option value="zhk2">ЖК Халиуллина, 196/17</option>-->
-<!--            <option value="zhk3">ЖК Жамбыла, 118</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <div class="input-group">-->
-<!--          <label for="barrier">Выберите шлагбаум</label>-->
-<!--          <select id="barrier" class="select">-->
-<!--            <option value="barrier1">Шлагбаум 1</option>-->
-<!--            <option value="barrier2">Шлагбаум 2</option>-->
-<!--            <option value="barrier3">Шлагбаум 3</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <button class="button">Присоединить</button>-->
-<!--      </div>-->
     </div>
   </div>
 </body>

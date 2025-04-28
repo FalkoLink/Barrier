@@ -1,62 +1,66 @@
 package com.example.BarrierApp.controllers;
 
+import com.example.BarrierApp.models.Role;
 import com.example.BarrierApp.models.User;
-import com.example.BarrierApp.services.AdminService;
+import com.example.BarrierApp.services.AddressService;
 import com.example.BarrierApp.services.RoleService;
+import com.example.BarrierApp.services.UserService;
 import com.example.BarrierApp.util.UserValidator;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    private final AdminService adminService;
+    private final UserService userService;
     private final RoleService roleService;
     private final UserValidator userValidator;
-
-    @Autowired
-    public UserController(AdminService adminService, RoleService roleService, UserValidator userValidator) {
-        this.adminService = adminService;
-        this.roleService = roleService;
-        this.userValidator = userValidator;
-    }
+    private final AddressService addressService;
 
     @GetMapping
-    public String listUsers(Model model,  HttpServletRequest request) {
-        model.addAttribute("users", adminService.findAll());
-        model.addAttribute("currentPath", request.getRequestURI());
+    public String listUsers(Model model, @RequestParam(required = false) String search) {
+        if (search != null && !search.isEmpty()) {
+            List<User> searchedUsers = userService.search(search);
+            model.addAttribute("users", searchedUsers);
+            model.addAttribute("search", search);
+        }else{
+            model.addAttribute("users", userService.findAll());
+        }
         return "admin/user/users";
     }
 
     @GetMapping("/edit/{id}")
     public String editUserForm(@PathVariable Long id, Model model) {
-        model.addAttribute("user", adminService.findById(id).orElseThrow());
+        User user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        model.addAttribute("user", user);
+        model.addAttribute("role", user.getRole());
         model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("addresses", addressService.findByUsers(new ArrayList<>(Collections.singleton(user))));
+
         return "admin/user/edit_user";
     }
 
     @PostMapping("/edit/{id}")
-    public String updateUser(@PathVariable Long id, @ModelAttribute("user") @Valid User user,
-                             BindingResult bindingResult, Model model) {
-        userValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("user", user);
-            return "admin/user/edit_user";
-        }
-        adminService.update(id, user);
+    public String updateUser(@PathVariable Long id, @RequestParam("roleId") Long roleId) {
+        User user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        Role role = roleService.findById(roleId).orElseThrow(() -> new IllegalArgumentException("Role not found"));
+        user.setRole(role);
+        userService.update(id, user);
 
-        return "redirect:/admin/users";
+        return "redirect:/admin/users/edit/"+id;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
-        adminService.delete(id);
+        userService.delete(id);
         return "redirect:/admin/users";
     }
 }

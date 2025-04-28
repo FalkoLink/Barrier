@@ -6,6 +6,7 @@ import com.example.BarrierApp.repositories.BarrierRepository;
 import com.example.BarrierApp.services.BarrierService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class BarrierServiceImpl implements BarrierService {
     }
 
     @Override
+    @Transactional
     public Barrier save(Barrier barrier) {
         return barrierRepository.save(barrier);
     }
@@ -37,7 +39,15 @@ public class BarrierServiceImpl implements BarrierService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         barrierRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Barrier update(Long id, Barrier barrier) {
+        barrier.setId(id);
+        return barrierRepository.save(barrier);
     }
 }

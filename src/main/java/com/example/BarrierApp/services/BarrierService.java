@@ -11,5 +11,7 @@ public interface BarrierService {
     Barrier save(Barrier barrier);
     List<Barrier> findByAddress(Address address);
     void deleteById(Long id);
+
+    Barrier update(Long id, Barrier barrier);
 }
 

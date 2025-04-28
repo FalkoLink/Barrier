@@ -11,7 +11,7 @@
   <div class="main">
     <section id="barriers">
       <h1>Адреса</h1>
-      <button class="add-button">Добавить Адрес</button>
+      <a class="add-button btn" th:href="@{/admin/addresses/create}">Добавить Адрес</a>
       <table>
         <thead>
         <tr>
@@ -23,7 +23,7 @@
         <tbody>
         <tr th:each="address : ${addresses}">
           <td th:text="${address.id}"></td>
-          <td><a th:href="@{/admin/addresses/{id}(id=${address.id})}" th:text="${address.address}"></a></td>
+          <td><a th:href="@{/admin/addresses/{id}(id=${address.id})}" th:text="${address.addressName}"></a></td>
           <td class="action-icons">
             <a th:href="@{/admin/addresses/edit/{id}(id=${address.id})}"><i class="fa-solid fa-pen"></i></a>
             <a th:href="@{/admin/addresses/delete/{id}(id=${address.id})}"><i class="fa-solid fa-trash"></i></a>

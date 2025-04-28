@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="fragment/head::head(pageTitle='Управление Адресами')">
+</head>
+<body class="admin-page">
+
+<div th:replace="fragment/navbar::navbar"></div>
+<div style="display: flex; flex: 1; width: 100%;">
+  <div th:replace="fragment/sidebar::sidebar(currentPage='address')"></div>
+
+  <div class="main">
+    <section id="barriers">
+      <a th:href="@{/admin/addresses}"><-Назад</a>
+      <h1>Создать Шлагбаум</h1>
+      <form th:action="@{/admin/addresses/{address_id}/save(address_id=${address_id})}" method="post" th:object="${barrier}">
+        <div>
+          <label for="name">Название шлагбаума:</label>
+          <input type="text" th:field="*{name}" id="name" maxlength="100" required />
+          <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <div>
+          <label for="connection">Подключение:</label>
+          <select th:field="*{connection}" id="connection">
+            <option th:each="conn : ${connections}"
+                    th:value="${conn.id}"
+                    th:text="${conn.name}">
+            </option>
+          </select>
+          <div th:if="${#fields.hasErrors('connection')}" th:errors="*{connection}"></div>
+        </div>
+
+        <button type="submit">Создать</button>
+      </form>
+
+    </section>
+  </div>
+</div>
+
+</body>
+</html>

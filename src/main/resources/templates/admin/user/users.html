@@ -9,9 +9,13 @@
   <div th:replace="fragment/sidebar::sidebar(currentPage='users')"></div>
 
   <div class="main">
-    <section id="users" class="active">
+    <section id="users">
       <h1>Пользователи</h1>
-      <button class="add-button">Добавить пользователя</button>
+      <form th:action="@{/admin/users}" method="get">
+        <input type="text" name="search" th:value="${search}" placeholder="Поиск..."/>
+        <button type="submit">Найти</button>
+      </form>
+      <button th:if="${search!=null}"  onclick="clearParamsAndReload()">Очистить</button>
       <table>
         <thead>
         <tr>
@@ -44,6 +48,11 @@
     </section>
   </div>
 </div>
-
+<script>
+  function clearParamsAndReload() {
+    const url = window.location.origin + window.location.pathname;
+    window.location.href = url;
+  }
+</script>
 </body>
 </html>
